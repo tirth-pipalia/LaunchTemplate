@@ -1,0 +1,45 @@
+{
+  "vpc-provider:account=620228650709:filter.tag:Name=rms-prod-vpc:region=me-south-1:returnAsymmetricSubnets=true": {
+    "vpcId": "vpc-069ed54b3cae80cc6",
+    "vpcCidrBlock": "10.0.0.0/16",
+    "availabilityZones": [],
+    "subnetGroups": [
+      {
+        "name": "Subnet1Public",
+        "type": "Public",
+        "subnets": [
+          {
+            "subnetId": "subnet-073ad3ecccac71abe",
+            "cidr": "10.0.0.0/24",
+            "availabilityZone": "me-south-1a",
+            "routeTableId": "rtb-0d1e40dbee281c69e"
+          },
+          {
+            "subnetId": "subnet-0b138fbacb00668b4",
+            "cidr": "10.0.1.0/24",
+            "availabilityZone": "me-south-1b",
+            "routeTableId": "rtb-00825c94d2f649f29"
+          }
+        ]
+      },
+      {
+        "name": "Subnet2Private",
+        "type": "Isolated",
+        "subnets": [
+          {
+            "subnetId": "subnet-0881b7e3cfb3ac65c",
+            "cidr": "10.0.2.0/24",
+            "availabilityZone": "me-south-1a",
+            "routeTableId": "rtb-00dc2b31961596c7b"
+          },
+          {
+            "subnetId": "subnet-06a22babe7f4dccfb",
+            "cidr": "10.0.3.0/24",
+            "availabilityZone": "me-south-1b",
+            "routeTableId": "rtb-064ce3b1217a43548"
+          }
+        ]
+      }
+    ]
+  }
+}

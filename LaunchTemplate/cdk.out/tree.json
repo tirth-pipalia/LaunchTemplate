@@ -1,0 +1,262 @@
+{
+  "version": "tree-0.1",
+  "tree": {
+    "id": "App",
+    "path": "",
+    "children": {
+      "Tree": {
+        "id": "Tree",
+        "path": "Tree",
+        "constructInfo": {
+          "fqn": "constructs.Construct",
+          "version": "10.0.99"
+        }
+      },
+      "LaunchTemplateStack": {
+        "id": "LaunchTemplateStack",
+        "path": "LaunchTemplateStack",
+        "children": {
+          "VPCid": {
+            "id": "VPCid",
+            "path": "LaunchTemplateStack/VPCid",
+            "children": {
+              "Subnet1PublicSubnet1": {
+                "id": "Subnet1PublicSubnet1",
+                "path": "LaunchTemplateStack/VPCid/Subnet1PublicSubnet1",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.Resource",
+                  "version": "2.17.0"
+                }
+              },
+              "Subnet1PublicSubnet2": {
+                "id": "Subnet1PublicSubnet2",
+                "path": "LaunchTemplateStack/VPCid/Subnet1PublicSubnet2",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.Resource",
+                  "version": "2.17.0"
+                }
+              },
+              "Subnet2PrivateSubnet1": {
+                "id": "Subnet2PrivateSubnet1",
+                "path": "LaunchTemplateStack/VPCid/Subnet2PrivateSubnet1",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.Resource",
+                  "version": "2.17.0"
+                }
+              },
+              "Subnet2PrivateSubnet2": {
+                "id": "Subnet2PrivateSubnet2",
+                "path": "LaunchTemplateStack/VPCid/Subnet2PrivateSubnet2",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.Resource",
+                  "version": "2.17.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.Resource",
+              "version": "2.17.0"
+            }
+          },
+          "SecurityGroupID": {
+            "id": "SecurityGroupID",
+            "path": "LaunchTemplateStack/SecurityGroupID",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "LaunchTemplateStack/SecurityGroupID/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroup",
+                  "aws:cdk:cloudformation:props": {
+                    "groupDescription": "LaunchTemplateStack/SecurityGroupID",
+                    "groupName": "rms-web-prod-sg",
+                    "securityGroupEgress": [
+                      {
+                        "cidrIp": "0.0.0.0/0",
+                        "description": "Allow all outbound traffic by default",
+                        "ipProtocol": "-1"
+                      }
+                    ],
+                    "securityGroupIngress": [
+                      {
+                        "cidrIp": "0.0.0.0/0",
+                        "ipProtocol": "tcp",
+                        "fromPort": 22,
+                        "toPort": 22,
+                        "description": "from 0.0.0.0/0:22"
+                      },
+                      {
+                        "cidrIp": "0.0.0.0/0",
+                        "ipProtocol": "tcp",
+                        "fromPort": 80,
+                        "toPort": 80,
+                        "description": "from 0.0.0.0/0:80"
+                      },
+                      {
+                        "cidrIp": "0.0.0.0/0",
+                        "ipProtocol": "tcp",
+                        "fromPort": 443,
+                        "toPort": 443,
+                        "description": "from 0.0.0.0/0:443"
+                      }
+                    ],
+                    "vpcId": "vpc-069ed54b3cae80cc6"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroup",
+                  "version": "2.17.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ec2.SecurityGroup",
+              "version": "2.17.0"
+            }
+          },
+          "FromRoleARNId": {
+            "id": "FromRoleARNId",
+            "path": "LaunchTemplateStack/FromRoleARNId",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.Resource",
+              "version": "2.17.0"
+            }
+          },
+          "ImmutableRoleFromRoleARNId": {
+            "id": "ImmutableRoleFromRoleARNId",
+            "path": "LaunchTemplateStack/ImmutableRoleFromRoleARNId",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.Resource",
+              "version": "2.17.0"
+            }
+          },
+          "LaunchTemplateId": {
+            "id": "LaunchTemplateId",
+            "path": "LaunchTemplateStack/LaunchTemplateId",
+            "children": {
+              "Profile": {
+                "id": "Profile",
+                "path": "LaunchTemplateStack/LaunchTemplateId/Profile",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::IAM::InstanceProfile",
+                  "aws:cdk:cloudformation:props": {
+                    "roles": [
+                      "TirthEC2RoleForSSM"
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.CfnInstanceProfile",
+                  "version": "2.17.0"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "LaunchTemplateStack/LaunchTemplateId/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::LaunchTemplate",
+                  "aws:cdk:cloudformation:props": {
+                    "launchTemplateData": {
+                      "iamInstanceProfile": {
+                        "arn": {
+                          "Fn::GetAtt": [
+                            "LaunchTemplateIdProfile88872FF1",
+                            "Arn"
+                          ]
+                        }
+                      },
+                      "imageId": {
+                        "Ref": "SsmParameterValueawsserviceamiamazonlinuxlatestamznamihvmx8664gp2C96584B6F00A464EAD1953AFF4B05118Parameter"
+                      },
+                      "instanceType": "t3.micro",
+                      "keyName": "TirthBahrain-KP",
+                      "securityGroupIds": [
+                        {
+                          "Fn::GetAtt": [
+                            "SecurityGroupID6EBC2941",
+                            "GroupId"
+                          ]
+                        }
+                      ],
+                      "tagSpecifications": [
+                        {
+                          "resourceType": "instance",
+                          "tags": [
+                            {
+                              "key": "Name",
+                              "value": "LaunchTemplateStack/LaunchTemplateId"
+                            }
+                          ]
+                        },
+                        {
+                          "resourceType": "volume",
+                          "tags": [
+                            {
+                              "key": "Name",
+                              "value": "LaunchTemplateStack/LaunchTemplateId"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    "launchTemplateName": "rma-launch-template-prod"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnLaunchTemplate",
+                  "version": "2.17.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ec2.LaunchTemplate",
+              "version": "2.17.0"
+            }
+          },
+          "SsmParameterValue:--aws--service--ami-amazon-linux-latest--amzn-ami-hvm-x86_64-gp2:C96584B6-F00A-464E-AD19-53AFF4B05118.Parameter": {
+            "id": "SsmParameterValue:--aws--service--ami-amazon-linux-latest--amzn-ami-hvm-x86_64-gp2:C96584B6-F00A-464E-AD19-53AFF4B05118.Parameter",
+            "path": "LaunchTemplateStack/SsmParameterValue:--aws--service--ami-amazon-linux-latest--amzn-ami-hvm-x86_64-gp2:C96584B6-F00A-464E-AD19-53AFF4B05118.Parameter",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnParameter",
+              "version": "2.17.0"
+            }
+          },
+          "SsmParameterValue:--aws--service--ami-amazon-linux-latest--amzn-ami-hvm-x86_64-gp2:C96584B6-F00A-464E-AD19-53AFF4B05118": {
+            "id": "SsmParameterValue:--aws--service--ami-amazon-linux-latest--amzn-ami-hvm-x86_64-gp2:C96584B6-F00A-464E-AD19-53AFF4B05118",
+            "path": "LaunchTemplateStack/SsmParameterValue:--aws--service--ami-amazon-linux-latest--amzn-ami-hvm-x86_64-gp2:C96584B6-F00A-464E-AD19-53AFF4B05118",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.Resource",
+              "version": "2.17.0"
+            }
+          },
+          "CDKMetadata": {
+            "id": "CDKMetadata",
+            "path": "LaunchTemplateStack/CDKMetadata",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "LaunchTemplateStack/CDKMetadata/Default",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnResource",
+                  "version": "2.17.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.0.99"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "aws-cdk-lib.Stack",
+          "version": "2.17.0"
+        }
+      }
+    },
+    "constructInfo": {
+      "fqn": "aws-cdk-lib.App",
+      "version": "2.17.0"
+    }
+  }
+}

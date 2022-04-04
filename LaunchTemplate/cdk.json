@@ -1,0 +1,53 @@
+{
+  "app": "python app.py",
+  "watch": {
+    "include": [
+      "**"
+    ],
+    "exclude": [
+      "README.md",
+      "cdk*.json",
+      "requirements*.txt",
+      "source.bat",
+      "**/__init__.py",
+      "python/__pycache__",
+      "tests"
+    ]
+  },
+  "context": {
+    "@aws-cdk/aws-apigateway:usagePlanKeyOrderInsensitiveId": true,
+    "@aws-cdk/core:stackRelativeExports": true,
+    "@aws-cdk/aws-rds:lowercaseDbIdentifier": true,
+    "@aws-cdk/aws-lambda:recognizeVersionProps": true,
+    "@aws-cdk/aws-cloudfront:defaultSecurityPolicyTLSv1.2_2021": true,
+    "@aws-cdk-containers/ecs-service-extensions:enableDefaultLogDriver": true,
+    "@aws-cdk/aws-ec2:uniqueImdsv2TemplateName": true,
+    "@aws-cdk/core:target-partitions": [
+      "aws",
+      "aws-cn"
+    ],
+    "securityGroupInput": {
+      "securityGroupName": "rms-web-prod-sg",
+      "port1": 22,
+      "port2": 80,
+      "port3": 443
+    },
+    "vpcInput": {
+      "vpcName": "rms-prod-vpc"
+    },
+    "instanceInput": {
+      "instanceClass": "BURSTABLE3",
+      "instanceSize": "MICRO",
+      "az": "me-south-1b",
+      "instanceName": "rms-webserver-prod",
+      "keyName": "TirthBahrain-KP"
+    },
+    "launchTemplateInput": {
+      "launchTemplateName": "rma-launch-template-prod"
+    },
+    "iamInput": {
+      "roleARN": "arn:aws:iam::620228650709:instance-profile/TirthEC2RoleForSSM",
+      "mutable": false
+    }
+  }
+}

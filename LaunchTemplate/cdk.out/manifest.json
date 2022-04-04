@@ -1,0 +1,112 @@
+{
+  "version": "16.0.0",
+  "artifacts": {
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    },
+    "LaunchTemplateStack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "LaunchTemplateStack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "LaunchTemplateStack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://620228650709/me-south-1",
+      "properties": {
+        "templateFile": "LaunchTemplateStack.template.json",
+        "tags": {
+          "cost-center": "8998",
+          "department": "Information-technology",
+          "workload-name": "rms-webserver-prod"
+        },
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::620228650709:role/cdk-hnb659fds-deploy-role-620228650709-me-south-1",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::620228650709:role/cdk-hnb659fds-cfn-exec-role-620228650709-me-south-1",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-620228650709-me-south-1/32a6b97f9211ea595d47becb128d5afa450901d7b72b8ebec389a3c54f436200.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "LaunchTemplateStack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::620228650709:role/cdk-hnb659fds-lookup-role-620228650709-me-south-1",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "LaunchTemplateStack.assets"
+      ],
+      "metadata": {
+        "/LaunchTemplateStack": [
+          {
+            "type": "aws:cdk:stack-tags",
+            "data": [
+              {
+                "Key": "cost-center",
+                "Value": "8998"
+              },
+              {
+                "Key": "department",
+                "Value": "Information-technology"
+              },
+              {
+                "Key": "workload-name",
+                "Value": "rms-webserver-prod"
+              }
+            ]
+          }
+        ],
+        "/LaunchTemplateStack/SecurityGroupID/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SecurityGroupID6EBC2941"
+          }
+        ],
+        "/LaunchTemplateStack/LaunchTemplateId/Profile": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LaunchTemplateIdProfile88872FF1"
+          }
+        ],
+        "/LaunchTemplateStack/LaunchTemplateId/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LaunchTemplateIdB1419346"
+          }
+        ],
+        "/LaunchTemplateStack/SsmParameterValue:--aws--service--ami-amazon-linux-latest--amzn-ami-hvm-x86_64-gp2:C96584B6-F00A-464E-AD19-53AFF4B05118.Parameter": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SsmParameterValueawsserviceamiamazonlinuxlatestamznamihvmx8664gp2C96584B6F00A464EAD1953AFF4B05118Parameter"
+          }
+        ],
+        "/LaunchTemplateStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/LaunchTemplateStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/LaunchTemplateStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "LaunchTemplateStack"
+    }
+  }
+}
